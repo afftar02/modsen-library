@@ -1,29 +1,27 @@
 import React, { ChangeEvent, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import Input from "./Input";
+import PasswordInput from "./PasswordInput";
 
-const meta: Meta<typeof Input> = {
-  title: "Components/Input",
-  component: Input,
+const meta: Meta<typeof PasswordInput> = {
+  title: "Components/PasswordInput",
+  component: PasswordInput,
 };
 
 export default meta;
 
-type Story = StoryObj<typeof Input>;
+type Story = StoryObj<typeof PasswordInput>;
 
-type InputStoryProps = {
+type PasswordInputStoryProps = {
   placeholder: string;
   color: string;
-  iconId: string;
   isError: boolean;
 };
 
-const InputWithHooks = ({iconId, placeholder, isError, color}: InputStoryProps) => {
+const PasswordInputWithHooks = ({placeholder, isError, color}: PasswordInputStoryProps) => {
   const [value, setValue] = useState('');
 
   return (
-    <Input
-      iconId={iconId}
+    <PasswordInput
       placeholder={placeholder}
       onChange={(event: ChangeEvent<HTMLInputElement>) => setValue(event.target.value)}
       value={value}
@@ -34,16 +32,14 @@ const InputWithHooks = ({iconId, placeholder, isError, color}: InputStoryProps) 
 };
 
 export const Primary: Story = {
-  render: ({iconId, placeholder, isError, color}) =>
-    <InputWithHooks
-      iconId={iconId ?? 'email'}
+  render: ({placeholder, isError, color}) =>
+    <PasswordInputWithHooks
       placeholder={placeholder}
       isError={!!isError}
       color={color}
     />,
   args:{
-    iconId: 'email',
-    placeholder: 'Enter email',
+    placeholder: 'Enter password',
     isError: false,
     color: '#000',
   }
