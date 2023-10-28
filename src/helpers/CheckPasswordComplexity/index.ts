@@ -8,7 +8,7 @@ export const checkPasswordComplexity = (value: string): string => {
     return 'High';
   } else if (
     value.length >= 8 &&
-    value.length <= 12 &&
+    value.length <= 16 &&
     value !== value.toLowerCase()
   ) {
     return 'Medium';
