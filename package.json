@@ -20,11 +20,13 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "7.5.1",
-    "typescript": "^5.2.2"
+    "typescript": "^5.2.2",
+    "styled-components": "^6.1.0"
   },
   "peerDependencies": {
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.0"
   },
   "scripts": {
     "storybook": "storybook dev -p 6006",
@@ -35,9 +37,5 @@
   },
   "resolutions": {
     "string-width": "^4"
-  },
-  "dependencies": {
-    "react-router-dom": "^6.17.0",
-    "styled-components": "^6.1.0"
   }
 }
