@@ -37,7 +37,6 @@
     "string-width": "^4"
   },
   "dependencies": {
-    "framer-motion": "^10.16.4",
     "react-router-dom": "^6.17.0",
     "styled-components": "^6.1.0"
   }
