@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import React, { useMemo, useRef, useState } from 'react';
-import Icon from "../Icon/Icon";
+import Icon from "../Icon";
 
 type ReviewProps = {
   title: string;

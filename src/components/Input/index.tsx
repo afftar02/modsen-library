@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import React, { ChangeEventHandler, MouseEventHandler } from 'react';
-import Icon from "../Icon/Icon";
+import Icon from "../Icon";
 
 type InputProps = {
   placeholder: string;

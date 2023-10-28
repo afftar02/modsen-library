@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import GitHubAuthButton from "./GitHubAuthButton";
+import GitHubAuthButton from "./index";
 
 const meta: Meta<typeof GitHubAuthButton> = {
   title: "Components/GitHubAuthButton",

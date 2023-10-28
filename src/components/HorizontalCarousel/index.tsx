@@ -1,6 +1,6 @@
 import { styled } from 'styled-components';
 import React, { useCallback, useEffect, useMemo, useRef } from 'react';
-import Icon from "../Icon/Icon";
+import Icon from "../Icon";
 
 type HorizontalCarouselProps = {
   data: Date[];
@@ -105,7 +105,7 @@ const Divider = styled.div`
 const FIRST_SLIDE_OFFSET = 348;
 const LAST_SLIDE_OFFSET = 298;
 
-function Carousel({ data, value, onClick }: HorizontalCarouselProps) {
+function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
 
@@ -191,4 +191,4 @@ function Carousel({ data, value, onClick }: HorizontalCarouselProps) {
   );
 }
 
-export default Carousel;
+export default HorizontalCarousel;

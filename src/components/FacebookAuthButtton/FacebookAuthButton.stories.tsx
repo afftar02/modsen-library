@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import FacebookAuthButton from "./FacebookAuthButton";
+import FacebookAuthButton from "./index";
 
 const meta: Meta<typeof FacebookAuthButton> = {
   title: "Components/FacebookAuthButton",

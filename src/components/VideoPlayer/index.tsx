@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { styled } from 'styled-components';
-import Icon from "../Icon/Icon";
+import Icon from "../Icon";
 import VideoSettings from "../VideoSettings";
 import { secToMin } from '../../helpers/ConvertSecToMin';
 import { timeToSec } from '../../helpers/ConvertTimeToSec';

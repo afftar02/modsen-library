@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Session from "./Session";
+import Session from "./index";
 
 const meta: Meta<typeof Session> = {
   title: "Components/Session",

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useCallback, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import FileInput from "./FileInput";
+import FileInput from "./index";
 
 const meta: Meta<typeof FileInput> = {
   title: "Components/FileInput",

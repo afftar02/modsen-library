@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import HorizontalCarousel from "./HorizontalCarousel";
+import HorizontalCarousel from "./index";
 
 const meta: Meta<typeof HorizontalCarousel> = {
   title: "Components/HorizontalCarousel",

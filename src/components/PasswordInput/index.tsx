@@ -5,7 +5,7 @@ import React, {
   useState,
 } from 'react';
 import { styled } from 'styled-components';
-import Input from "../Input/Input";
+import Input from "../Input";
 import { checkPasswordComplexity } from '../../helpers/CheckPasswordComplexity';
 
 type PasswordInputProps = {

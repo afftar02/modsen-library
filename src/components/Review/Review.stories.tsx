@@ -1,5 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Review from "./Review";
+import Review from "./index";
 
 const meta: Meta<typeof Review> = {
   title: "Components/Review",

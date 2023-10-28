@@ -1,6 +1,6 @@
 import React from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import GoogleAuthButton from "./GoogleAuthButton";
+import GoogleAuthButton from "./index";
 
 const meta: Meta<typeof GoogleAuthButton> = {
   title: "Components/GoogleAuthButton",
