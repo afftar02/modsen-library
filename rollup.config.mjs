@@ -28,12 +28,11 @@ export default [{
     peerDepsExternal(),
     resolve(),
     commonjs(),
-    typescript(),
+    typescript({ tsconfig: './tsconfig.json' }),
     image(),
-    postcss({
-      extensions: ['.css']
-    })
-  ]
+    postcss()
+  ],
+  external: ["react", "react-dom", "styled-components"]
 }, {
   input: 'lib/index.d.ts',
   output: [{ file: 'lib/index.d.ts', format: 'es' }],
