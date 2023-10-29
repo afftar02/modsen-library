@@ -2,9 +2,8 @@ import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
-import postcss from "rollup-plugin-postcss";
 import dts from "rollup-plugin-dts";
-import svg from 'rollup-plugin-svg';
+import svgr from '@svgr/rollup';
 
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
@@ -29,10 +28,7 @@ export default [{
     resolve(),
     commonjs(),
     typescript(),
-    svg(),
-    postcss({
-      extensions: ['.css']
-    })
+    svgr({ icon: true }),
   ]
 }, {
   input: 'lib/index.d.ts',
