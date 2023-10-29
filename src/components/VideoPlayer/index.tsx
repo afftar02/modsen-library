@@ -138,8 +138,6 @@ const StyledVideo = styled.video`
 `;
 
 const THUMB_WIDTH = 16;
-const BAR_WIDTH_COEFFICIENT = 442;
-const FULLSCREEN_BAR_COEFFICIENT = 1060;
 
 const initialTime = {
   min: 0,
@@ -156,12 +154,16 @@ function VideoPlayer({ src }: VideoPlayerProps) {
   const [duration, setDuration] = useState(initialTime);
   const videoRef = useRef<HTMLVideoElement>(null);
   const cursorMoveTimeoutIdRef = useRef(0);
+  const progressBarRef = useRef<HTMLInputElement>(null);
 
   const calculateProgress = useCallback(
-    (barWidth: number) =>
-      (timeToSec(currentTime) / timeToSec(duration)) *
-        (barWidth - THUMB_WIDTH) +
-      THUMB_WIDTH / 2,
+    () => {
+      const barWidth = progressBarRef.current?.offsetWidth ?? 0;
+
+      return (timeToSec(currentTime) / timeToSec(duration)) *
+       (barWidth - THUMB_WIDTH) +
+       THUMB_WIDTH / 2;
+    },
     [currentTime, duration]
   );
 
@@ -381,11 +383,8 @@ function VideoPlayer({ src }: VideoPlayerProps) {
               min={0}
               max={timeToSec(duration)}
               value={timeToSec(currentTime)}
-              $progressWidth={
-                isFullScreen
-                  ? calculateProgress(FULLSCREEN_BAR_COEFFICIENT)
-                  : calculateProgress(BAR_WIDTH_COEFFICIENT)
-              }
+              ref={progressBarRef}
+              $progressWidth={calculateProgress()}
               onChange={handleProgressBarChange}
             />
             <TimeBlock>
