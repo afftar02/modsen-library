@@ -3,7 +3,7 @@ import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import typescript from "@rollup/plugin-typescript";
 import dts from "rollup-plugin-dts";
-import svgr from '@svgr/rollup';
+import image from '@rollup/plugin-image';
 
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
@@ -28,7 +28,7 @@ export default [{
     resolve(),
     commonjs(),
     typescript(),
-    svgr({ icon: true }),
+    image()
   ]
 }, {
   input: 'lib/index.d.ts',
