@@ -1,4 +1,5 @@
 import Button from "./components/Button";
+import CinemaHall from "./components/CinemaHall";
 import FacebookAuthButton from "./components/FacebookAuthButtton";
 import FileInput from "./components/FileInput";
 import GitHubAuthButton from "./components/GitHubAuthButton";
@@ -27,5 +28,6 @@ export {
   Review,
   Seat,
   Session,
-  VideoPlayer
+  VideoPlayer,
+  CinemaHall
 };
