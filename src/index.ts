@@ -12,6 +12,7 @@ import RadioButton from "./components/RadioButton";
 import Review from "./components/Review";
 import Seat from "./components/Seat";
 import Session from "./components/Session";
+import VerticalCarousel from "./components/VerticalCarousel";
 import VideoPlayer from "./components/VideoPlayer";
 
 export {
@@ -29,5 +30,6 @@ export {
   Seat,
   Session,
   VideoPlayer,
-  CinemaHall
+  CinemaHall,
+  VerticalCarousel
 };
