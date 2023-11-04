@@ -1,4 +1,5 @@
 import Button from "./components/Button";
+import CinemaHall from "./components/CinemaHall";
 import FacebookAuthButton from "./components/FacebookAuthButtton";
 import FileInput from "./components/FileInput";
 import GitHubAuthButton from "./components/GitHubAuthButton";
@@ -11,6 +12,7 @@ import RadioButton from "./components/RadioButton";
 import Review from "./components/Review";
 import Seat from "./components/Seat";
 import Session from "./components/Session";
+import VerticalCarousel from "./components/VerticalCarousel";
 import VideoPlayer from "./components/VideoPlayer";
 
 export {
@@ -27,5 +29,7 @@ export {
   Review,
   Seat,
   Session,
-  VideoPlayer
+  VideoPlayer,
+  CinemaHall,
+  VerticalCarousel
 };
