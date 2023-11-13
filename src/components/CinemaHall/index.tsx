@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import React, { useCallback, useMemo } from 'react';
 import Seat from "../Seat";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 export type SeatType = {
   id: number;
@@ -29,6 +30,10 @@ const Wrapper = styled.div`
   background: #313131;
   flex-shrink: 0;
   padding: 13px 50px;
+
+  @media(max-width: 700px){
+    padding: 13px 0;
+  }
 `;
 
 const ScreenContainer = styled.div`
@@ -47,7 +52,13 @@ const DescriptionContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 46px;
+  
+  @media(max-width: 700px){
+    max-width: 360px;
+    gap: 25px;
+  }
 `;
 
 const DescriptionItem = styled.div`
@@ -95,11 +106,12 @@ const StyledSeat = styled(Seat)<{ $left: number; $top: number }>`
   position: absolute;
   left: ${(props) => `${props.$left}px`};
   top: ${(props) => `${props.$top}px`};
+  
+  @media(max-width: 700px){
+    width: 30px;
+    height: 30px;
+  }
 `;
-
-const SEAT_WIDTH = 45,
-  SEAT_SPACE = 17,
-  CENTER_SPACE = 90;
 
 function CinemaHall({
   seats,
@@ -110,6 +122,12 @@ function CinemaHall({
   reservedSeatLabel,
   selectedSeatLabel,
 }: CinemaHallProps) {
+  const { width } = useWindowDimensions();
+
+  const seatWidth = useMemo(() => width > 700 ? 45 : 30, [width]);
+  const seatSpace = useMemo(() => width > 700 ? 17 : 8, [width]);
+  const centerSpace = useMemo(() => width > 700 ? 90 : 20, [width]);
+
   const rowsLengths = useMemo(() => {
     const map = new Map();
     for (const seat of seats) {
@@ -120,41 +138,41 @@ function CinemaHall({
 
   const calculateSeatTopPosition = useCallback((row: number) => {
     if (row === 1) return 0;
-    return (row - 1) * (SEAT_WIDTH + SEAT_SPACE);
-  }, []);
+    return (row - 1) * (seatWidth + seatSpace);
+  }, [width]);
 
   const calculateSeatLeftPosition = useCallback(
     (seatNumber: number, row: number) => {
       // Calculating adding space for centering rows
       const seatsSpaceToAdd =
         ((Math.max(...rowsLengths.values()) - rowsLengths.get(row)) / 2) *
-        (SEAT_WIDTH + SEAT_SPACE);
+        (seatWidth + seatSpace);
 
       if (seatNumber === 1) return seatsSpaceToAdd;
       if (seatNumber <= rowsLengths.get(row) / 2) {
-        return (seatNumber - 1) * (SEAT_WIDTH + SEAT_SPACE) + seatsSpaceToAdd;
+        return (seatNumber - 1) * (seatWidth + seatSpace) + seatsSpaceToAdd;
       } else {
         return (
-          CENTER_SPACE +
-          (seatNumber - 1) * SEAT_WIDTH +
-          (seatNumber - 2) * SEAT_SPACE +
+          centerSpace +
+          (seatNumber - 1) * seatWidth +
+          (seatNumber - 2) * seatSpace +
           seatsSpaceToAdd
         );
       }
     },
-    [rowsLengths]
+    [rowsLengths, width]
   );
 
   const calculateWidth = useCallback(() => {
     const maxRowLength = Math.max(...rowsLengths.values());
     return (
-      maxRowLength * SEAT_WIDTH + (maxRowLength - 2) * SEAT_SPACE + CENTER_SPACE
+      maxRowLength * seatWidth + (maxRowLength - 2) * seatSpace + centerSpace
     );
-  }, [rowsLengths]);
+  }, [rowsLengths, width]);
 
   const calculateHeight = useCallback(() => {
-    return rowsLengths.size * SEAT_WIDTH + (rowsLengths.size - 1) * SEAT_SPACE;
-  }, [rowsLengths]);
+    return rowsLengths.size * seatWidth + (rowsLengths.size - 1) * seatSpace;
+  }, [rowsLengths, width]);
 
   return (
     <Wrapper>
