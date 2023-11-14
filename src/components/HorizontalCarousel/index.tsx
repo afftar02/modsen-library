@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Icon from "../Icon";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 type HorizontalCarouselProps = {
   data: Date[];
@@ -39,6 +40,16 @@ const Slider = styled.div`
   /* Hide scrollbar for Chrome, Safari and Opera */
   &::-webkit-scrollbar {
     display: none;
+  }
+  
+  @media(max-width: 1000px){
+    width: 484px;
+  }
+  @media(max-width: 700px){
+    margin: 0;
+    overflow: scroll;
+    gap: 10px;
+    width: 336px;
   }
 `;
 
@@ -80,6 +91,18 @@ const Slide = styled.div<{ $isActive: boolean; $isNearActive: boolean }>`
     margin-right: 30px;
   }
 
+  @media(max-width: 700px){
+    width: 78px;
+    height: 76px;
+
+    &:first-child {
+      margin-left: 5px;
+    }
+    &:last-child {
+      margin-right: 5px;
+    }
+  }
+
   ${(props) =>
   props.$isActive &&
   `
@@ -91,8 +114,21 @@ const Slide = styled.div<{ $isActive: boolean; $isNearActive: boolean }>`
     &:hover {
       opacity: 1;
     }
+    
+    @media(max-width: 700px){
+      height: 108px;
+      width: 110px;
+    }
    `};
-  ${(props) => props.$isNearActive && `width: 114px; height: 112px;`};
+  ${(props) => props.$isNearActive && `
+    width: 114px;
+    height: 112px;
+    
+    @media(max-width: 700px){
+      width: 94px;
+      height: 92px;
+    }
+  `};
 `;
 
 const Divider = styled.div`
@@ -100,14 +136,32 @@ const Divider = styled.div`
   height: 2px;
   flex-shrink: 0;
   background-color: #fff;
-`;
 
-const FIRST_SLIDE_OFFSET = 348;
-const LAST_SLIDE_OFFSET = 298;
+  @media(max-width: 1000px){
+    width: 484px;
+  }
+  @media(max-width: 700px){
+    width: 336px;
+  }
+`;
 
 function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
   const sliderRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
+  const [prevIndex, setPrevIndex] = useState(0);
+
+  const { width } = useWindowDimensions();
+
+  const firstSlideOffset = useMemo(() => {
+    if(width > 1000) return 335;
+    else if(width > 700) return 195;
+    else return 145;
+  }, [width]);
+  const lastSlideOffset = useMemo(() => {
+    if(width > 1000) return 298;
+    else if(width > 700) return 158;
+    else return 96;
+  }, [width]);
 
   const currentIndex = useMemo(() => {
     const index = data.findIndex((item) => item.getDate() === value.getDate());
@@ -127,9 +181,9 @@ function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
   const scrollToCurrentItem = useCallback(
     (index: number) => {
       const x =
-        currentIndex <= index
-          ? itemsRef.current[index].offsetLeft - FIRST_SLIDE_OFFSET
-          : itemsRef.current[index].offsetLeft - LAST_SLIDE_OFFSET;
+        prevIndex <= index
+          ? itemsRef.current[index].offsetLeft - firstSlideOffset
+          : itemsRef.current[index].offsetLeft - lastSlideOffset;
 
       sliderRef.current?.scrollTo(x, 0);
     },
@@ -138,6 +192,7 @@ function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
 
   const handleItemClick = (index: number) => {
     if (onClick) {
+      setPrevIndex(currentIndex);
       onClick(data[checkIndex(index)]);
     }
   };
@@ -156,13 +211,15 @@ function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
     <Wrapper>
       <Divider />
       <SliderContainer>
-        <StyledIcon
-          id="arrows-left"
-          width={55}
-          height={34}
-          viewBox="0 0 55 34"
-          onClick={() => handleItemClick(currentIndex - 1)}
-        />
+        {width > 700 && (
+          <StyledIcon
+            id="arrows-left"
+            width={55}
+            height={34}
+            viewBox="0 0 55 34"
+            onClick={() => handleItemClick(currentIndex - 1)}
+          />
+        )}
         <Slider ref={sliderRef}>
           {data.map((item, index) => (
             <Slide
@@ -178,13 +235,15 @@ function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
             </Slide>
           ))}
         </Slider>
-        <StyledIcon
-          id="arrows-right"
-          width={55}
-          height={34}
-          viewBox="0 0 55 34"
-          onClick={() => handleItemClick(currentIndex + 1)}
-        />
+        {width > 700 && (
+          <StyledIcon
+            id="arrows-right"
+            width={55}
+            height={34}
+            viewBox="0 0 55 34"
+            onClick={() => handleItemClick(currentIndex + 1)}
+          />
+        )}
       </SliderContainer>
       <Divider />
     </Wrapper>

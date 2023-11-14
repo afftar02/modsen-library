@@ -4,6 +4,7 @@ import Icon from "../Icon";
 import VideoSettings from "../VideoSettings";
 import { secToMin } from '../../helpers/ConvertSecToMin';
 import { timeToSec } from '../../helpers/ConvertTimeToSec';
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 type VideoPlayerProps = {
   src: string;
@@ -135,6 +136,11 @@ const RightControlsContainer = styled.div`
 const StyledVideo = styled.video`
   background-color: #000;
   transition: all 0.5s ease-in-out;
+  
+  @media(max-width: 900px){
+    width: 100vw;
+    height: 100vh;
+  }
 `;
 
 const THUMB_WIDTH = 16;
@@ -155,6 +161,8 @@ function VideoPlayer({ src }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const cursorMoveTimeoutIdRef = useRef(0);
   const progressBarRef = useRef<HTMLInputElement>(null);
+
+  const { width } = useWindowDimensions();
 
   const calculateProgress = useCallback(
     () => {
@@ -411,13 +419,15 @@ function VideoPlayer({ src }: VideoPlayerProps) {
               />
             )}
             <VideoSettings speed={speed} onChangeSpeed={handleChangeSpeed} />
-            <ControlIcon
-              id={'screen-control'}
-              height={20}
-              width={20}
-              viewBox="0 0 24 24"
-              onClick={toggleScreenSize}
-            />
+            {width > 900 && (
+                <ControlIcon
+                id={'screen-control'}
+                height={20}
+                width={20}
+                viewBox="0 0 24 24"
+                onClick={toggleScreenSize}
+              />
+            )}
           </RightControlsContainer>
         </ControlsBar>
       </ControlsContainer>
