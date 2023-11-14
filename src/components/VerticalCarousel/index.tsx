@@ -2,6 +2,7 @@ import { styled } from 'styled-components';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Icon from "../Icon";
+import useWindowDimensions from "../../hooks/useWindowDimensions";
 
 type SlideType = {
   id: number;
@@ -73,6 +74,10 @@ const TagsContainer = styled.div`
   &::-webkit-scrollbar {
     display: none;
   }
+  
+  @media(max-width: 700px) {
+    flex-direction: column;
+  }
 `;
 
 const Tag = styled.div`
@@ -97,6 +102,10 @@ const SliderContainer = styled.div`
   overflow: hidden;
 
   margin-left: 96px;
+  
+  @media(max-width: 700px){
+    margin-left: 25px;
+  }
 `;
 
 const ImageSlider = styled.div`
@@ -126,6 +135,10 @@ const ArrowsContainer = styled.div`
   height: 86px;
 
   margin-left: 37px;
+
+  @media(max-width: 700px){
+    margin-left: 20px;
+  }
 `;
 
 const StyledIcon = styled(Icon)`
@@ -197,6 +210,8 @@ function VerticalCarousel({
   const currentItemRef = useRef<HTMLDivElement>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const itemsRef = useRef<HTMLDivElement[]>([]);
+
+  const { width } = useWindowDimensions();
 
   const checkIndex = useCallback(
     (index: number) => {
@@ -274,7 +289,7 @@ function VerticalCarousel({
           <CurrentImage
             src={data.at(currentIndex)?.posterUrl}
             alt="poster"
-            width={262}
+            width={width > 700 ? 262 : 162}
           />
           <InfoContainer>
             <Title $color={titleColor}>{data.at(currentIndex)?.title}</Title>
