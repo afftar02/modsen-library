@@ -1,15 +1,6 @@
-import React, { MouseEventHandler } from 'react';
+import React from 'react';
 import sprite from './assets/sprite.svg';
-
-type IconProps = {
-  id: string;
-  width?: number;
-  height?: number;
-  viewBox?: string;
-  fill?: string;
-  stroke?: string;
-  onClick?: MouseEventHandler<SVGSVGElement>;
-};
+import { IconProps } from "./types";
 
 function Icon({ id, ...props }: IconProps) {
   return (

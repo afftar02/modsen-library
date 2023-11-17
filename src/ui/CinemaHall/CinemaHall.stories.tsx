@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import CinemaHall, { SeatType } from "./index";
+import CinemaHall from "./index";
+import { SeatType } from "./types";
 
 const meta: Meta<typeof CinemaHall> = {
   title: "UI/CinemaHall",
