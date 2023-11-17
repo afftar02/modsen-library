@@ -1,6 +1,7 @@
 import React from "react";
-import { GitHubAuthProps } from "./types";
+
 import { GitHubButton, GitHubIcon } from "./styled";
+import { GitHubAuthProps } from "./types";
 
 function GitHubAuthButton({ authUrl, text }: GitHubAuthProps) {
   const handleClick = async () => {

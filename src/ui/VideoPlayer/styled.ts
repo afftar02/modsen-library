@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+
 import Icon from "ui/Icon";
 
 export const PlayerContainer = styled.div`

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { ReviewProps } from "./types";
+
 import {
   AuthorDescription,
   ReviewContainer,
@@ -8,6 +8,7 @@ import {
   ReviewTitle, ShowIcon,
   ShowMoreContainer, ShowMoreText
 } from "./styled";
+import { ReviewProps } from "./types";
 
 const DEFAULT_HEIGHT = 217;
 const TEXT_OVERFLOW_COEFFICIENT = 2;

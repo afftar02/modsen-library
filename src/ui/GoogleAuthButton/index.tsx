@@ -1,6 +1,7 @@
 import React from "react";
-import { GoogleAuthProps } from "./types";
+
 import { GoogleButton, GoogleIcon } from "./styled";
+import { GoogleAuthProps } from "./types";
 
 function GoogleAuthButton({ authUrl, text, borderColor }: GoogleAuthProps) {
   const handleClick = async () => {

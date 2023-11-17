@@ -1,5 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
+
 import PasswordInput from "./index";
 
 const meta: Meta<typeof PasswordInput> = {

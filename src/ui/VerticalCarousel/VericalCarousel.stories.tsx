@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react";
-import VerticalCarousel from "./index";
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import type { Meta, StoryObj } from "@storybook/react";
+
+import VerticalCarousel from "./index";
 
 const meta: Meta<typeof VerticalCarousel> = {
   title: "UI/VerticalCarousel",

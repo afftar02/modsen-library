@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
-import { SessionProps } from "./types";
+
 import { CinemaFormat, SeatsContainer, SeatsText, SessionContainer, SessionTime } from "./styled";
+import { SessionProps } from "./types";
 
 function Session({
   start,

@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
-import { FileInputProps } from "./types";
+
 import { FileInputContainer, FileUploadLabel, StyledInput, UploadedFileName } from "./styled";
+import { FileInputProps } from "./types";
 
 function FileInput({
   onChange,

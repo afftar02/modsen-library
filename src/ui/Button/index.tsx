@@ -1,6 +1,7 @@
 import React from 'react';
-import { ButtonProps } from "./types";
+
 import { StyledButton } from "./styled";
+import { ButtonProps } from "./types";
 
 function Button({
   children,

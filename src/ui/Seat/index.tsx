@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { SeatProps } from "./types";
+
 import { StyledSeat } from "./styled";
+import { SeatProps } from "./types";
 
 function Seat({ reserved, selected = false, onClick, ...props }: SeatProps) {
   const [active, setActive] = useState(selected);

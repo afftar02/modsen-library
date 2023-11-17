@@ -1,6 +1,7 @@
 import React from 'react';
-import { InputProps } from "./types";
+
 import { InputContainer, StyledIcon, StyledInput } from "./styled";
+import { InputProps } from "./types";
 
 function Input({
   iconId,

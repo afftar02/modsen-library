@@ -1,6 +1,7 @@
 import React from "react";
-import { RadioButtonProps } from "./types";
+
 import { ItemLabel, ItemValue, RadioInput } from "./styled";
+import { RadioButtonProps } from "./types";
 
 function RadioButton({
   id,

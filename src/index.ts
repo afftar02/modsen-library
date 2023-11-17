@@ -17,6 +17,7 @@ import VideoPlayer from "./ui/VideoPlayer";
 
 export {
   Button,
+  CinemaHall,
   FacebookAuthButton,
   FileInput,
   GitHubAuthButton,
@@ -29,7 +30,5 @@ export {
   Review,
   Seat,
   Session,
-  VideoPlayer,
-  CinemaHall,
-  VerticalCarousel
-};
+  VerticalCarousel,
+  VideoPlayer};

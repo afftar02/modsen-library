@@ -1,6 +1,7 @@
-import { styled } from "styled-components";
-import Icon from "ui/Icon";
 import { Link } from "react-router-dom";
+import { styled } from "styled-components";
+
+import Icon from "ui/Icon";
 
 export const Wrapper = styled.div`
   display: flex;

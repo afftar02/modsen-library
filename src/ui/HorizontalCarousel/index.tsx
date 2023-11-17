@@ -1,7 +1,8 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import useWindowDimensions from "hooks/useWindowDimensions";
-import { HorizontalCarouselProps } from "./types";
+
 import { Divider, Slide, Slider, SliderContainer, StyledIcon, Wrapper } from "./styled";
+import { HorizontalCarouselProps } from "./types";
 
 function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
   const sliderRef = useRef<HTMLDivElement>(null);

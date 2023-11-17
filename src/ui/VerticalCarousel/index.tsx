@@ -1,17 +1,18 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useWindowDimensions from "hooks/useWindowDimensions";
-import { VerticalCarouselProps } from "./types";
+
 import {
   ArrowsContainer,
   CurrentContainer,
-  CurrentImage, GenreText, ImageSlider,
+  CurrentImage, GenreText, Image,
+  ImageSlider,
   InfoContainer, QualityText, Slide, SliderContainer, StyledIcon,
   StyledLink,
   Tag,
   TagsContainer,
   Title,
-  Wrapper, Image
-} from "./styled";
+  Wrapper} from "./styled";
+import { VerticalCarouselProps } from "./types";
 
 const FIRST_SLIDE_OFFSET = 216;
 const LAST_SLIDE_OFFSET = 158;

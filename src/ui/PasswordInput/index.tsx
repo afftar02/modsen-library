@@ -2,10 +2,12 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import Input from "ui/Input";
 import { checkPasswordComplexity } from 'helpers/CheckPasswordComplexity';
-import { PasswordInputProps } from "./types";
+
+import Input from "ui/Input";
+
 import { ComplexityLabel, ComplexityLabelContainer, StrengthBar } from "./styled";
+import { PasswordInputProps } from "./types";
 
 function PasswordInput({
   placeholder,

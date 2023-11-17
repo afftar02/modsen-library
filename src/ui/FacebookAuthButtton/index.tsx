@@ -1,6 +1,7 @@
 import React from "react";
-import { FacebookAuthProps } from "./types";
+
 import { FacebookButton, FacebookIcon } from "./styled";
+import { FacebookAuthProps } from "./types";
 
 function FacebookAuthButton({ authUrl, text }: FacebookAuthProps) {
   const handleClick = async () => {

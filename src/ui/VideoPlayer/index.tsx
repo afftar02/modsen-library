@@ -1,9 +1,10 @@
 import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import VideoSettings from "ui/VideoSettings";
 import { secToMin } from 'helpers/ConvertSecToMin';
 import { timeToSec } from 'helpers/ConvertTimeToSec';
 import useWindowDimensions from "hooks/useWindowDimensions";
-import { VideoPlayerProps } from "./types";
+
+import VideoSettings from "ui/VideoSettings";
+
 import {
   CenterControlsContainer,
   ControlIcon,
@@ -12,6 +13,7 @@ import {
   PlayerContainer, ProgressBar, ProgressBarContainer, RightControlsContainer,
   StyledVideo, TimeBlock
 } from "./styled";
+import { VideoPlayerProps } from "./types";
 
 const THUMB_WIDTH = 16;
 

@@ -1,8 +1,10 @@
 import React, { useCallback, useState } from 'react';
+
 import Icon from "ui/Icon";
 import VideoSpeedSettings from "ui/VideoSpeedSettings";
-import { VideoSettingsProps } from "./types";
+
 import { ControlIcon, SettingsContainer, SettingsItem, SettingsItemValue, SettingsText } from "./styled";
+import { VideoSettingsProps } from "./types";
 
 function VideoSettings({ speed, onChangeSpeed }: VideoSettingsProps) {
   const [isSettingsOpened, setSettingsOpened] = useState(false);

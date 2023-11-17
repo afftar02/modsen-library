@@ -1,7 +1,9 @@
-import Icon from "ui/Icon";
 import React from "react";
-import { VideoSpeedSettingsProps } from "./types";
+
+import Icon from "ui/Icon";
+
 import { ParamTitleBlock, SettingsContainer, SettingsParamItem, SettingsText, TickIcon } from "./styled";
+import { VideoSpeedSettingsProps } from "./types";
 
 const speedValues = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 

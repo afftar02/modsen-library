@@ -1,15 +1,20 @@
 import React, { useCallback, useMemo } from 'react';
 import useWindowDimensions from "hooks/useWindowDimensions";
-import { CinemaHallProps } from "./types";
+
 import {
   AvailableSeat,
   DescriptionContainer,
-  DescriptionItem, Label, ReservedSeat,
+  DescriptionItem,
+  Label,
+  ReservedSeat,
+  Screen,
   ScreenContainer,
-  SeatsContainer, SelectedSeat,
+  SeatsContainer,
+  SelectedSeat,
   StyledSeat,
-  Wrapper, Screen
+  Wrapper
 } from "./styled";
+import { CinemaHallProps } from "./types";
 
 function CinemaHall({
   seats,
