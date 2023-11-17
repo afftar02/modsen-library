@@ -15,6 +15,10 @@ const SettingsContainer = styled.div`
   border-radius: 12px;
   background-color: rgba(80, 80, 80, 0.5);
   padding: 10px 0;
+
+  @media(max-width: 900px){
+    padding: 5px 0;
+  }
 `;
 
 const SettingsText = styled.span`
@@ -47,6 +51,10 @@ const SettingsParamItem = styled.div`
 
   &:hover {
     background-color: rgba(120, 120, 120, 0.5);
+  }
+
+  @media(max-width: 900px){
+    height: 30px;
   }
 `;
 
