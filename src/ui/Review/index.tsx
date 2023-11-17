@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import Icon from "../Icon";
 
 type ReviewProps = {
@@ -48,9 +48,10 @@ const AuthorDescription = styled.span`
 
 const ReviewTextContainer = styled.div<{ $isOpened: boolean }>`
   width: 326px;
-  height: 217px;
+  height: ${props => props.$isOpened ? 'auto' : '217px'};
   overflow: hidden;
-  transition: height 0.3s ease-in-out;
+  max-height: ${props => props.$isOpened ? '1000px' : '217px'};
+  transition: max-height 0.3s ease-in-out;
   display: -webkit-box;
   -webkit-line-clamp: ${(props) => (props.$isOpened ? 'unset' : 9)};
   -webkit-box-orient: vertical;
@@ -93,7 +94,7 @@ const ShowMoreText = styled.span`
 `;
 
 const DEFAULT_HEIGHT = 217;
-const TEXT_OVERFLOW_COEFFICIENT = 1.8;
+const TEXT_OVERFLOW_COEFFICIENT = 2;
 
 function Review({
   title,
@@ -104,7 +105,6 @@ function Review({
   bgColor,
 }: ReviewProps) {
   const [opened, setOpened] = useState(false);
-  const reviewRef = useRef<HTMLDivElement>(null);
 
   const isOverflowed = useMemo(
     () => text.length / TEXT_OVERFLOW_COEFFICIENT > DEFAULT_HEIGHT,
@@ -112,10 +112,7 @@ function Review({
   );
 
   const handleShowClick = () => {
-    if (reviewRef.current && isOverflowed) {
-      reviewRef.current.style.height = opened
-        ? `${DEFAULT_HEIGHT}px`
-        : 'auto';
+    if (isOverflowed) {
       setOpened(!opened);
     }
   };
@@ -129,7 +126,7 @@ function Review({
       <AuthorDescription>
         {fromLabel} {author}
       </AuthorDescription>
-      <ReviewTextContainer ref={reviewRef} $isOpened={opened}>
+      <ReviewTextContainer $isOpened={opened || (!opened && !isOverflowed)}>
         <ReviewText>{text}</ReviewText>
       </ReviewTextContainer>
       {isOverflowed && (
