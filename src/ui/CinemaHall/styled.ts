@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Seat from "../Seat";
+import Seat from "ui/Seat";
 
 export const Wrapper = styled.div`
   display: flex;

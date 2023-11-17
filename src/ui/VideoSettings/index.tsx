@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
-import Icon from "../Icon";
-import VideoSpeedSettings from "../VideoSpeedSettings";
+import Icon from "ui/Icon";
+import VideoSpeedSettings from "ui/VideoSpeedSettings";
 import { VideoSettingsProps } from "./types";
 import { ControlIcon, SettingsContainer, SettingsItem, SettingsItemValue, SettingsText } from "./styled";
 

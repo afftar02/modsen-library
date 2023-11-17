@@ -1,4 +1,4 @@
-import Icon from "../Icon";
+import Icon from "ui/Icon";
 import React from "react";
 import { VideoSpeedSettingsProps } from "./types";
 import { ParamTitleBlock, SettingsContainer, SettingsParamItem, SettingsText, TickIcon } from "./styled";

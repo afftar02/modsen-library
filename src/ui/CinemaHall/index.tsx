@@ -1,5 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import useWindowDimensions from "hooks/useWindowDimensions";
 import { CinemaHallProps } from "./types";
 import {
   AvailableSeat,

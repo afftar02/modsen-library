@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Icon from "../Icon";
+import Icon from "ui/Icon";
 import { Link } from "react-router-dom";
 
 export const Wrapper = styled.div`

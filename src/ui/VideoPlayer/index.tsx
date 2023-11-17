@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import VideoSettings from "../VideoSettings";
-import { secToMin } from '../../helpers/ConvertSecToMin';
-import { timeToSec } from '../../helpers/ConvertTimeToSec';
-import useWindowDimensions from "../../hooks/useWindowDimensions";
+import VideoSettings from "ui/VideoSettings";
+import { secToMin } from 'helpers/ConvertSecToMin';
+import { timeToSec } from 'helpers/ConvertTimeToSec';
+import useWindowDimensions from "hooks/useWindowDimensions";
 import { VideoPlayerProps } from "./types";
 import {
   CenterControlsContainer,

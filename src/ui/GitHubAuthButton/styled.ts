@@ -1,5 +1,5 @@
 import { styled } from "styled-components";
-import Icon from "../Icon";
+import Icon from "ui/Icon";
 
 export const GitHubButton = styled.button`
   position: relative;

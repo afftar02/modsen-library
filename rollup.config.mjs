@@ -5,6 +5,7 @@ import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import dts from "rollup-plugin-dts";
 import image from '@rollup/plugin-image';
+import alias from 'rollup-plugin-alias';
 
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
@@ -25,6 +26,15 @@ export default [{
     }
   ],
   plugins: [
+    alias({
+      resolve: ['.jsx', '.js', '.tsx', '.ts'],
+      entries:[
+        {
+          find:'src',
+          replacement: './src'
+        },
+      ]
+    }),
     peerDepsExternal(),
     resolve(),
     commonjs(),
