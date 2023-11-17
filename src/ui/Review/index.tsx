@@ -1,12 +1,11 @@
 import React, { useMemo, useState } from 'react';
-import Icon from "../Icon";
 import { ReviewProps } from "./types";
 import {
   AuthorDescription,
   ReviewContainer,
   ReviewText,
   ReviewTextContainer,
-  ReviewTitle,
+  ReviewTitle, ShowIcon,
   ShowMoreContainer, ShowMoreText
 } from "./styled";
 
@@ -20,6 +19,7 @@ function Review({
   author,
   text,
   bgColor,
+  hideLabel,
 }: ReviewProps) {
   const [opened, setOpened] = useState(false);
 
@@ -48,8 +48,8 @@ function Review({
       </ReviewTextContainer>
       {isOverflowed && (
         <ShowMoreContainer onClick={handleShowClick}>
-          <ShowMoreText>{showMoreLabel}</ShowMoreText>
-          <Icon id={'show'} width={40} height={40} viewBox="0 0 40 40" />
+          <ShowMoreText>{opened ? hideLabel : showMoreLabel}</ShowMoreText>
+          <ShowIcon id={'show'} width={40} height={40} viewBox="0 0 40 40" $isOpened={opened} />
         </ShowMoreContainer>
       )}
     </ReviewContainer>

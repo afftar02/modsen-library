@@ -1,4 +1,5 @@
 import { styled } from "styled-components";
+import Icon from "../Icon";
 
 export const ReviewContainer = styled.div<{ $bgColor: string }>`
   border-radius: 20px;
@@ -80,4 +81,8 @@ export const ShowMoreText = styled.span`
   font-size: 16px;
   font-weight: 300;
   text-transform: uppercase;
+`;
+
+export const ShowIcon = styled(Icon)<{ $isOpened: boolean }>`
+  ${props => props.$isOpened && 'transform: rotate(180deg)'};
 `;
