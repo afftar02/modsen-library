@@ -35,9 +35,14 @@ const CurrentContainer = styled.div`
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
   max-width: 262px;
+  align-items: center;
 
   &:hover {
     transform: scale(1.05);
+  }
+
+  @media(max-width: 700px) {
+    max-width: 160px;
   }
 `;
 
