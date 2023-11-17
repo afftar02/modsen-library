@@ -94,7 +94,6 @@ const ShowMoreText = styled.span`
 
 const DEFAULT_HEIGHT = 217;
 const TEXT_OVERFLOW_COEFFICIENT = 1.8;
-const TEXT_COEFFICIENT = 1.6;
 
 function Review({
   title,
@@ -116,7 +115,7 @@ function Review({
     if (reviewRef.current && isOverflowed) {
       reviewRef.current.style.height = opened
         ? `${DEFAULT_HEIGHT}px`
-        : `${text.length / TEXT_COEFFICIENT}px`;
+        : 'auto';
       setOpened(!opened);
     }
   };
