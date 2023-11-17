@@ -51,7 +51,7 @@ function VideoPlayer({ src }: VideoPlayerProps) {
     } else {
       videoRef.current?.play();
     }
-    setIsPlaying(!isPlaying);
+    setIsPlaying(prev => !prev);
   }, [isPlaying]);
 
   const toggleVolume = useCallback(() => {

@@ -9,7 +9,7 @@ function VideoSettings({ speed, onChangeSpeed }: VideoSettingsProps) {
   const [openedSettingsParam, setOpenedSettingsParam] = useState('');
 
   const handleSettingsClick = useCallback(() => {
-    setSettingsOpened(!isSettingsOpened);
+    setSettingsOpened(prev => !prev);
     setOpenedSettingsParam('');
   }, [isSettingsOpened]);
 
