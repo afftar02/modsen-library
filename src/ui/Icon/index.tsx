@@ -1,6 +1,6 @@
 import React from 'react';
+import sprite from 'assets/sprite.svg';
 
-import sprite from './assets/sprite.svg';
 import { IconProps } from "./types";
 
 function Icon({ id, ...props }: IconProps) {
