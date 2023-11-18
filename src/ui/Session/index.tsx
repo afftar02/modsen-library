@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react';
+import { convertDatePeriod } from 'helpers/ConvertDatePeriod';
 
 import { CinemaFormat, SeatsContainer, SeatsText, SessionContainer, SessionTime } from "./styled";
 import { SessionProps } from "./types";
@@ -13,23 +14,7 @@ function Session({
   seatsLabel,
   selected = false,
 }: SessionProps) {
-  const sessionTime = useMemo(() => {
-    let startTimeStr = 'AM',
-      endTimeStr = 'AM';
-    const startDate = new Date(start);
-    const endDate = new Date(end);
-
-    if (startDate.getHours() > 12) {
-      startDate.setHours(startDate.getHours() - 12);
-      startTimeStr = 'PM';
-    }
-    if (endDate.getHours() > 12) {
-      endDate.setHours(endDate.getHours() - 12);
-      endTimeStr = 'PM';
-    }
-
-    return `${startDate.getHours()}:${startDate.getMinutes()} ${startTimeStr} - ${endDate.getHours()}:${endDate.getMinutes()} ${endTimeStr}`;
-  }, [end, start]);
+  const sessionTime = useMemo(() => convertDatePeriod(start, end), [end, start]);
 
   return (
     <SessionContainer $selected={selected} onClick={onClick}>
