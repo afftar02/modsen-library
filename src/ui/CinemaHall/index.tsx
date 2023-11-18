@@ -1,4 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
+import { calculateRowsLengths } from 'helpers/CalculateRowsLengths';
+import { calculateSeatLeftPosition } from 'helpers/CalculateSeatLeftPosition';
+import { calculateSeatTopPosition } from 'helpers/CalculateSeatTopPosition';
 import useWindowDimensions from "hooks/useWindowDimensions";
 
 import {
@@ -30,39 +33,14 @@ function CinemaHall({
   const seatWidth = useMemo(() => width > 700 ? 45 : 30, [width]);
   const seatSpace = useMemo(() => width > 700 ? 17 : 8, [width]);
   const centerSpace = useMemo(() => width > 700 ? 90 : 20, [width]);
+  const rowsLengths = useMemo(() => calculateRowsLengths(seats), [seats]);
 
-  const rowsLengths = useMemo(() => {
-    const map = new Map();
-    for (const seat of seats) {
-      map.set(seat.row, map.has(seat.row) ? map.get(seat.row) + 1 : 1);
-    }
-    return map;
-  }, [seats]);
-
-  const calculateSeatTopPosition = useCallback((row: number) => {
-    if (row === 1) return 0;
-    return (row - 1) * (seatWidth + seatSpace);
-  }, [width]);
-
-  const calculateSeatLeftPosition = useCallback(
-    (seatNumber: number, row: number) => {
-      // Calculating adding space for centering rows
-      const seatsSpaceToAdd =
-        ((Math.max(...rowsLengths.values()) - rowsLengths.get(row)) / 2) *
-        (seatWidth + seatSpace);
-
-      if (seatNumber === 1) return seatsSpaceToAdd;
-      if (seatNumber <= rowsLengths.get(row) / 2) {
-        return (seatNumber - 1) * (seatWidth + seatSpace) + seatsSpaceToAdd;
-      } else {
-        return (
-          centerSpace +
-          (seatNumber - 1) * seatWidth +
-          (seatNumber - 2) * seatSpace +
-          seatsSpaceToAdd
-        );
-      }
-    },
+  const getSeatTopPosition = useCallback(
+    (row: number) => calculateSeatTopPosition(row, seatWidth, seatSpace),
+    [seatWidth, seatSpace]
+  );
+  const getSeatLeftPosition = useCallback(
+    (seatNumber: number, row: number) => calculateSeatLeftPosition(rowsLengths, seatNumber, row, seatWidth, seatSpace, centerSpace),
     [rowsLengths, width]
   );
 
@@ -88,8 +66,8 @@ function CinemaHall({
             key={seat.id}
             reserved={seat.ticket !== null}
             selected={chosenSeatIds?.includes(seat.id)}
-            $top={calculateSeatTopPosition(seat.row)}
-            $left={calculateSeatLeftPosition(seat.number, seat.row)}
+            $top={getSeatTopPosition(seat.row)}
+            $left={getSeatLeftPosition(seat.number, seat.row)}
             onClick={() => onSeatClick(seat.id, seat.price)}
           />
         ))}

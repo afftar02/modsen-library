@@ -1,11 +1,4 @@
-export type SeatType = {
-  id: number;
-  price: number;
-  number: number;
-  row: number;
-  ticket?: { id: number } | null;
-};
-
+import { SeatType } from 'types/seat';
 
 export type CinemaHallProps = {
   screenLabel: string;
