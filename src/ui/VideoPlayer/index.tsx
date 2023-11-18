@@ -1,190 +1,61 @@
-import React, { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import { secToMin } from 'helpers/ConvertSecToMin';
+import React, { useRef } from 'react';
 import { timeToSec } from 'helpers/ConvertTimeToSec';
+import useControlsVisibility from 'hooks/useControlsVisibility';
+import usePlayerControls from 'hooks/usePlayerControls';
+import usePlayerProgress from "hooks/usePlayerProgress";
 import useWindowDimensions from "hooks/useWindowDimensions";
 
 import VideoSettings from "ui/VideoSettings";
 
-import { DEFAULT_HEIGHT, DEFAULT_WIDTH, FULLSCREEN_HEIGHT, FULLSCREEN_WIDTH, initialTime, THUMB_WIDTH } from "./config";
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH, FULLSCREEN_HEIGHT, FULLSCREEN_WIDTH, THUMB_WIDTH } from "./config";
 import {
   CenterControlsContainer,
   ControlIcon,
   ControlsBar,
   ControlsContainer,
-  PlayerContainer, ProgressBar, ProgressBarContainer, RightControlsContainer,
-  StyledVideo, TimeBlock
+  PlayerContainer,
+  ProgressBar,
+  ProgressBarContainer,
+  RightControlsContainer,
+  StyledVideo,
+  TimeBlock
 } from "./styled";
 import { VideoPlayerProps } from "./types";
 
 function VideoPlayer({ src }: VideoPlayerProps) {
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [isMuted, setIsMuted] = useState(true);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isControlsHidden, setIsControlsHidden] = useState(false);
-  const [speed, setSpeed] = useState(1);
-  const [currentTime, setCurrentTime] = useState(initialTime);
-  const [duration, setDuration] = useState(initialTime);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const cursorMoveTimeoutIdRef = useRef(0);
   const progressBarRef = useRef<HTMLInputElement>(null);
 
   const { width } = useWindowDimensions();
 
-  const calculateProgress = useCallback(
-    () => {
-      const barWidth = progressBarRef.current?.offsetWidth ?? 0;
+  const { isControlsHidden, setControlsVisible } = useControlsVisibility();
 
-      return (timeToSec(currentTime) / timeToSec(duration)) *
-       (barWidth - THUMB_WIDTH) +
-       THUMB_WIDTH / 2;
-    },
-    [currentTime, duration]
-  );
+  const {
+    isPlaying,
+    isMuted,
+    isFullScreen,
+    speed,
+    currentTime,
+    duration,
+    togglePlay,
+    toggleVolume,
+    toggleScreenSize,
+    skipTime,
+    handleChangeSpeed,
+    handleProgressBarChange
+  } = usePlayerControls({
+    videoRef,
+    defaultWidth: DEFAULT_WIDTH,
+    defaultHeight: DEFAULT_HEIGHT,
+    fullscreenWidth: FULLSCREEN_WIDTH,
+    fullscreenHeight: FULLSCREEN_HEIGHT,
+    setControlsVisible,
+  });
 
-  const togglePlay = useCallback(() => {
-    if (isPlaying) {
-      videoRef.current?.pause();
-    } else {
-      videoRef.current?.play();
-    }
-    setIsPlaying(prev => !prev);
-  }, [isPlaying]);
-
-  const toggleVolume = useCallback(() => {
-    if (isMuted && videoRef.current) {
-      videoRef.current.muted = false;
-    } else if (videoRef.current) {
-      videoRef.current.muted = true;
-    }
-    setIsMuted(!isMuted);
-  }, [isMuted]);
-
-  const toggleScreenSize = useCallback(() => {
-    if (videoRef.current) {
-      if (!isFullScreen) {
-        videoRef.current.style.width = FULLSCREEN_WIDTH;
-        videoRef.current.style.height = FULLSCREEN_HEIGHT;
-      } else {
-        videoRef.current.style.width = DEFAULT_WIDTH;
-        videoRef.current.style.height = DEFAULT_HEIGHT;
-      }
-      setIsFullScreen(!isFullScreen);
-    }
-  }, [isFullScreen]);
-
-  const handleProgressBarChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
-      if (videoRef.current) {
-        videoRef.current.currentTime = +e.target.value;
-        setCurrentTime(secToMin(videoRef.current.currentTime));
-      }
-    },
-    []
-  );
-
-  const skipTime = useCallback((time: number, isBackward?: boolean) => {
-    if (videoRef.current) {
-      if (!isBackward) {
-        videoRef.current.currentTime += time;
-      } else {
-        videoRef.current.currentTime -= time;
-      }
-      setCurrentTime(secToMin(videoRef.current.currentTime));
-    }
-  }, []);
-
-  const handleChangeSpeed = useCallback((speed: number) => {
-    if (videoRef.current) {
-      videoRef.current.playbackRate = speed;
-      setSpeed(speed);
-    }
-  }, []);
-
-  const handleMouseMove = useCallback(() => {
-    clearTimeout(cursorMoveTimeoutIdRef.current);
-    setIsControlsHidden(false);
-
-    cursorMoveTimeoutIdRef.current = Number(
-      setTimeout(() => setIsControlsHidden(true), 1500)
-    );
-  }, []);
-
-  const handleKeyPressed = useCallback(
-    (event: globalThis.KeyboardEvent) => {
-      event.preventDefault();
-      handleMouseMove();
-      switch (event.code) {
-        case 'Space':
-          togglePlay();
-          break;
-        case 'KeyM':
-          toggleVolume();
-          break;
-        case 'KeyF':
-          toggleScreenSize();
-          break;
-        case 'ArrowLeft':
-          skipTime(10, true);
-          break;
-        case 'ArrowRight':
-          skipTime(10);
-          break;
-        case 'Comma':
-          if (speed > 0.25) {
-            handleChangeSpeed(speed - 0.25);
-          }
-          break;
-        case 'Period':
-          if (speed < 2) {
-            handleChangeSpeed(speed + 0.25);
-          }
-          break;
-        default:
-          break;
-      }
-    },
-    [
-      handleChangeSpeed,
-      handleMouseMove,
-      skipTime,
-      speed,
-      togglePlay,
-      toggleScreenSize,
-      toggleVolume,
-    ]
-  );
-
-  useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.onloadedmetadata = () => {
-        if (videoRef.current) {
-          setDuration(secToMin(videoRef.current.duration));
-        }
-      };
-    }
-  }, []);
-
-  useEffect(() => {
-    if (isPlaying) {
-      const interval = setInterval(() => {
-        if (videoRef.current) {
-          setCurrentTime(secToMin(videoRef.current.currentTime));
-        }
-      }, 1000);
-      return () => clearInterval(interval);
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    document.addEventListener('keydown', handleKeyPressed);
-
-    return () => {
-      document.removeEventListener('keydown', handleKeyPressed);
-    };
-  }, [handleKeyPressed]);
+  const progress = usePlayerProgress(progressBarRef, currentTime, duration, THUMB_WIDTH);
 
   return (
-    <PlayerContainer onMouseMove={handleMouseMove} onDoubleClick={togglePlay}>
+    <PlayerContainer onMouseMove={setControlsVisible} onDoubleClick={togglePlay}>
       <StyledVideo
         ref={videoRef}
         width={850}
@@ -258,7 +129,7 @@ function VideoPlayer({ src }: VideoPlayerProps) {
               max={timeToSec(duration)}
               value={timeToSec(currentTime)}
               ref={progressBarRef}
-              $progressWidth={calculateProgress()}
+              $progressWidth={progress}
               onChange={handleProgressBarChange}
             />
             <TimeBlock>

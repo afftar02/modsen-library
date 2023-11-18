@@ -1,10 +1,5 @@
 export const THUMB_WIDTH = 16;
 
-export const initialTime = {
-  min: 0,
-  sec: 0,
-};
-
 export const FULLSCREEN_WIDTH = '100vw';
 
 export const FULLSCREEN_HEIGHT = '100vh';
