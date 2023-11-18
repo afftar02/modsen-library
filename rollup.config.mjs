@@ -5,6 +5,8 @@ import typescript from "@rollup/plugin-typescript";
 import postcss from "rollup-plugin-postcss";
 import dts from "rollup-plugin-dts";
 import image from '@rollup/plugin-image';
+import alias from 'rollup-plugin-alias';
+import includePaths from 'rollup-plugin-includepaths';
 
 import { createRequire } from 'node:module';
 const requireFile = createRequire(import.meta.url);
@@ -25,6 +27,15 @@ export default [{
     }
   ],
   plugins: [
+    includePaths({ paths: ["src"] }),
+    alias({
+      entries:[
+        {
+          find:'src',
+          replacement: './src'
+        },
+      ]
+    }),
     peerDepsExternal(),
     resolve(),
     commonjs(),
@@ -36,6 +47,6 @@ export default [{
 }, {
   input: 'lib/index.d.ts',
   output: [{ file: 'lib/index.d.ts', format: 'es' }],
-  plugins: [dts()],
+  plugins: [dts({ tsconfig: './tsconfig.json' })],
   external: [/\.css$/]
 }];

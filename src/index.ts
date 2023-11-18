@@ -1,22 +1,23 @@
-import Button from "./components/Button";
-import CinemaHall from "./components/CinemaHall";
-import FacebookAuthButton from "./components/FacebookAuthButtton";
-import FileInput from "./components/FileInput";
-import GitHubAuthButton from "./components/GitHubAuthButton";
-import GoogleAuthButton from "./components/GoogleAuthButton";
-import HorizontalCarousel from "./components/HorizontalCarousel";
-import Icon from "./components/Icon";
-import Input from "./components/Input";
-import PasswordInput from "./components/PasswordInput";
-import RadioButton from "./components/RadioButton";
-import Review from "./components/Review";
-import Seat from "./components/Seat";
-import Session from "./components/Session";
-import VerticalCarousel from "./components/VerticalCarousel";
-import VideoPlayer from "./components/VideoPlayer";
+import Button from "./ui/Button";
+import CinemaHall from "./ui/CinemaHall";
+import FacebookAuthButton from "./ui/FacebookAuthButtton";
+import FileInput from "./ui/FileInput";
+import GitHubAuthButton from "./ui/GitHubAuthButton";
+import GoogleAuthButton from "./ui/GoogleAuthButton";
+import HorizontalCarousel from "./ui/HorizontalCarousel";
+import Icon from "./ui/Icon";
+import Input from "./ui/Input";
+import PasswordInput from "./ui/PasswordInput";
+import RadioButton from "./ui/RadioButton";
+import Review from "./ui/Review";
+import Seat from "./ui/Seat";
+import Session from "./ui/Session";
+import VerticalCarousel from "./ui/VerticalCarousel";
+import VideoPlayer from "./ui/VideoPlayer";
 
 export {
   Button,
+  CinemaHall,
   FacebookAuthButton,
   FileInput,
   GitHubAuthButton,
@@ -29,7 +30,5 @@ export {
   Review,
   Seat,
   Session,
-  VideoPlayer,
-  CinemaHall,
-  VerticalCarousel
-};
+  VerticalCarousel,
+  VideoPlayer};
