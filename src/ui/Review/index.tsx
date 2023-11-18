@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
+import { DEFAULT_HEIGHT, TEXT_OVERFLOW_COEFFICIENT } from "./config";
 import {
   AuthorDescription,
   ReviewContainer,
@@ -9,9 +10,6 @@ import {
   ShowMoreContainer, ShowMoreText
 } from "./styled";
 import { ReviewProps } from "./types";
-
-const DEFAULT_HEIGHT = 217;
-const TEXT_OVERFLOW_COEFFICIENT = 2;
 
 function Review({
   title,

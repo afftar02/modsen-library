@@ -5,6 +5,7 @@ import useWindowDimensions from "hooks/useWindowDimensions";
 
 import VideoSettings from "ui/VideoSettings";
 
+import { initialTime, THUMB_WIDTH } from "./config";
 import {
   CenterControlsContainer,
   ControlIcon,
@@ -14,13 +15,6 @@ import {
   StyledVideo, TimeBlock
 } from "./styled";
 import { VideoPlayerProps } from "./types";
-
-const THUMB_WIDTH = 16;
-
-const initialTime = {
-  min: 0,
-  sec: 0,
-};
 
 function VideoPlayer({ src }: VideoPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(true);

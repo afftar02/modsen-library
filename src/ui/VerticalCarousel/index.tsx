@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import useWindowDimensions from "hooks/useWindowDimensions";
 
+import { FIRST_SLIDE_OFFSET, LAST_SLIDE_OFFSET } from "./config";
 import {
   ArrowsContainer,
   CurrentContainer,
@@ -13,9 +14,6 @@ import {
   Title,
   Wrapper} from "./styled";
 import { VerticalCarouselProps } from "./types";
-
-const FIRST_SLIDE_OFFSET = 216;
-const LAST_SLIDE_OFFSET = 158;
 
 function VerticalCarousel({
   data,
