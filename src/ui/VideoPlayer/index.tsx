@@ -5,7 +5,7 @@ import useWindowDimensions from "hooks/useWindowDimensions";
 
 import VideoSettings from "ui/VideoSettings";
 
-import { initialTime, THUMB_WIDTH } from "./config";
+import { DEFAULT_HEIGHT, DEFAULT_WIDTH, FULLSCREEN_HEIGHT, FULLSCREEN_WIDTH, initialTime, THUMB_WIDTH } from "./config";
 import {
   CenterControlsContainer,
   ControlIcon,
@@ -62,11 +62,11 @@ function VideoPlayer({ src }: VideoPlayerProps) {
   const toggleScreenSize = useCallback(() => {
     if (videoRef.current) {
       if (!isFullScreen) {
-        videoRef.current.style.width = '100vw';
-        videoRef.current.style.height = '100vh';
+        videoRef.current.style.width = FULLSCREEN_WIDTH;
+        videoRef.current.style.height = FULLSCREEN_HEIGHT;
       } else {
-        videoRef.current.style.width = '850px';
-        videoRef.current.style.height = '480px';
+        videoRef.current.style.width = DEFAULT_WIDTH;
+        videoRef.current.style.height = DEFAULT_HEIGHT;
       }
       setIsFullScreen(!isFullScreen);
     }
