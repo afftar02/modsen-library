@@ -41,8 +41,8 @@ export const ReviewTextContainer = styled.div<{ $isOpened: boolean }>`
   width: 326px;
   height: ${props => props.$isOpened ? 'auto' : '217px'};
   overflow: hidden;
-  max-height: ${props => props.$isOpened ? '1000px' : '217px'};
-  transition: max-height 0.3s ease-in-out;
+  max-height: ${props => props.$isOpened ? '3000px' : '217px'};
+  transition: max-height 0.5s ease-in-out;
   display: -webkit-box;
   -webkit-line-clamp: ${(props) => (props.$isOpened ? 'unset' : 9)};
   -webkit-box-orient: vertical;
