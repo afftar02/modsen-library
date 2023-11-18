@@ -46,7 +46,7 @@ function HorizontalCarousel({ data, value, onClick }: HorizontalCarouselProps) {
 
       sliderRef.current?.scrollTo(x, 0);
     },
-    [currentIndex]
+    [firstSlideOffset, lastSlideOffset, prevIndex]
   );
 
   const handleItemClick = (index: number) => {

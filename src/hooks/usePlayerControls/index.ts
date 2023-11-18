@@ -26,7 +26,7 @@ export default function usePlayerControls({
       videoRef.current?.play();
     }
     setIsPlaying(prev => !prev);
-  }, [isPlaying]);
+  }, [isPlaying, videoRef]);
 
   const toggleVolume = useCallback(() => {
     if (isMuted && videoRef.current) {
@@ -35,7 +35,7 @@ export default function usePlayerControls({
       videoRef.current.muted = true;
     }
     setIsMuted(!isMuted);
-  }, [isMuted]);
+  }, [isMuted, videoRef]);
 
   const toggleScreenSize = useCallback(() => {
     if (videoRef.current) {
@@ -48,7 +48,7 @@ export default function usePlayerControls({
       }
       setIsFullScreen(!isFullScreen);
     }
-  }, [isFullScreen]);
+  }, [defaultHeight, defaultWidth, fullscreenHeight, fullscreenWidth, isFullScreen, videoRef]);
 
   const skipTime = useCallback((time: number, isBackward?: boolean) => {
     if (videoRef.current) {
@@ -59,14 +59,14 @@ export default function usePlayerControls({
       }
       setCurrentTime(secToMin(videoRef.current.currentTime));
     }
-  }, []);
+  }, [videoRef]);
 
   const handleChangeSpeed = useCallback((speed: number) => {
     if (videoRef.current) {
       videoRef.current.playbackRate = speed;
       setSpeed(speed);
     }
-  }, []);
+  }, [videoRef]);
 
   const handleProgressBarChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -75,7 +75,7 @@ export default function usePlayerControls({
         setCurrentTime(secToMin(videoRef.current.currentTime));
       }
     },
-    []
+    [videoRef]
   );
 
   const handleKeyPressed = useCallback(
@@ -131,7 +131,7 @@ export default function usePlayerControls({
         }
       };
     }
-  }, []);
+  }, [videoRef]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -142,7 +142,7 @@ export default function usePlayerControls({
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [isPlaying]);
+  }, [isPlaying, videoRef]);
 
   useEffect(() => {
     document.addEventListener('keydown', handleKeyPressed);

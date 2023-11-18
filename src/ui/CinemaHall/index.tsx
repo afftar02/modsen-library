@@ -41,7 +41,7 @@ function CinemaHall({
   );
   const getSeatLeftPosition = useCallback(
     (seatNumber: number, row: number) => calculateSeatLeftPosition(rowsLengths, seatNumber, row, seatWidth, seatSpace, centerSpace),
-    [rowsLengths, width]
+    [centerSpace, rowsLengths, seatSpace, seatWidth]
   );
 
   const calculateWidth = useCallback(() => {
@@ -49,11 +49,11 @@ function CinemaHall({
     return (
       maxRowLength * seatWidth + (maxRowLength - 2) * seatSpace + centerSpace
     );
-  }, [rowsLengths, width]);
+  }, [centerSpace, rowsLengths, seatSpace, seatWidth]);
 
   const calculateHeight = useCallback(() => {
     return rowsLengths.size * seatWidth + (rowsLengths.size - 1) * seatSpace;
-  }, [rowsLengths, width]);
+  }, [rowsLengths.size, seatSpace, seatWidth]);
 
   return (
     <Wrapper>
