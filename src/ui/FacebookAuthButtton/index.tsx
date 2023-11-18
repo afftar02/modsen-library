@@ -1,16 +1,11 @@
-import React from "react";
+import React, { useCallback } from 'react';
+import { openOAuth } from 'helpers/OpenOAuth';
 
 import { FacebookButton, FacebookIcon } from "./styled";
 import { FacebookAuthProps } from "./types";
 
 function FacebookAuthButton({ authUrl, text }: FacebookAuthProps) {
-  const handleClick = async () => {
-    try {
-      window.open(authUrl, '_self');
-    } catch (err) {
-      alert('Authorization error!');
-    }
-  };
+  const handleClick = useCallback(() => openOAuth(authUrl),[authUrl]);
 
   return (
     <FacebookButton onClick={handleClick}>

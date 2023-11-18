@@ -1,16 +1,11 @@
-import React from "react";
+import React, { useCallback } from 'react';
+import { openOAuth } from 'helpers/OpenOAuth';
 
 import { GoogleButton, GoogleIcon } from "./styled";
 import { GoogleAuthProps } from "./types";
 
 function GoogleAuthButton({ authUrl, text, borderColor }: GoogleAuthProps) {
-  const handleClick = async () => {
-    try {
-      window.open(authUrl, '_self');
-    } catch (err) {
-      alert('Authorization error!');
-    }
-  };
+  const handleClick = useCallback(() => openOAuth(authUrl),[authUrl]);
 
   return (
     <GoogleButton onClick={handleClick} $borderColor={borderColor ?? '#000'}>

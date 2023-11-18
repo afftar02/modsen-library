@@ -1,16 +1,11 @@
-import React from "react";
+import React, { useCallback } from 'react';
+import { openOAuth } from 'helpers/OpenOAuth';
 
 import { GitHubButton, GitHubIcon } from "./styled";
 import { GitHubAuthProps } from "./types";
 
 function GitHubAuthButton({ authUrl, text }: GitHubAuthProps) {
-  const handleClick = async () => {
-    try {
-      window.open(authUrl, '_self');
-    } catch (err) {
-      alert('Authorization error!');
-    }
-  };
+  const handleClick = useCallback(() => openOAuth(authUrl),[authUrl]);
 
   return (
     <GitHubButton onClick={handleClick}>
